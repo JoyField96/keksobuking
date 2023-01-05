@@ -67,5 +67,5 @@ const randomObject = () => {
 
     });
   }};
-
+randomObject();
 export {objectsArray};

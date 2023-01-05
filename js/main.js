@@ -1,6 +1,6 @@
 'use strict';
 
-import {objectsArray} from './util';
+import {objectsArray} from './util.js';
 
 console.log(objectsArray);
 
