@@ -42,7 +42,7 @@ let latY = RandomLocation()[1];
 const objectsArray = [];
 
 const randomObject = () => {
-  for (let i =0;i<10;i++) {
+  for (let i =0;i<1;i++) {
     objectsArray.push({
       autor: {
         avatar: 'img/avatars/user'+ (i + 1) + '.png',
