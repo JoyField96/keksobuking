@@ -2,7 +2,7 @@
 
 import {objectsArray} from './util.js';
 import {renderApartments} from './generate.js';
-import {renderApartments} from './form.js';
+import {apartmentTimeIn,apartmentTimeOut,apartmentType,apartmentPrice} from './form.js';
 renderApartments();
 
 
