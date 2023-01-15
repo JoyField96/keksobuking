@@ -1,9 +1,9 @@
 'use strict';
 
-import {objectsArray} from './util.js';
+//import {objectsArray} from './util.js';
 
 const apartmentTemplate = document.querySelector('#card').content.querySelector('.popup');
-const apartmentAddTest = document.querySelector('#map-canvas');
+//const apartmentAddTest = document.querySelector('#balloon');
 
 const renderApartment = ({offer,autor}) => {
   const apartmentPreview = apartmentTemplate.cloneNode(true);
@@ -60,14 +60,14 @@ const galleryPhotos = apartmentPreview.querySelector('.popup__photos');
   return apartmentPreview;
 };
 
-const renderApartments = () => {
-  let apartmentListFragment = document.createDocumentFragment();
-  objectsArray.forEach((offer) => {
-    apartmentListFragment.appendChild(renderApartment(offer));
-  });
+// const renderApartments = (object) => {
+//   let apartmentListFragment = document.createDocumentFragment();
+//   object.forEach((offer) => {
+//     apartmentListFragment.appendChild(renderApartment(offer));
+//   });
+//
+//   apartmentAddTest.appendChild(apartmentListFragment);
+// };
 
-  apartmentAddTest.appendChild(apartmentListFragment);
-};
-
-export { renderApartments };
+export { renderApartment };
 

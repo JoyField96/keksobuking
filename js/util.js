@@ -35,25 +35,24 @@ const getRandomArray = (features) =>{
 
 
 const getRandomLocation = a => _ => Object.values(a).map(([min, max]) => (Math.random() * (max - min) + min).toFixed(5));
-const RandomLocation = getRandomLocation(pos);
-let latX = RandomLocation()[0];
-let latY = RandomLocation()[1];
+let RandomLocation = getRandomLocation(pos);
+
 
 const objectsArray = [];
 
 const randomObject = () => {
-  for (let i =0;i<1;i++) {
+  for (let i =0;i<10;i++) {
     objectsArray.push({
       autor: {
         avatar: 'img/avatars/user'+ (i + 1) + '.png',
       },
       location: {
-        x: latX,
-        y: latY,
+        x: RandomLocation()[0],
+        y: RandomLocation()[1],
       },
       offer: {
         title: 'Заголовок',
-        address: 'location.' + latX + ' ,location.' + latY,
+        address: 'location.' + RandomLocation()[1] + ' ,location.' + RandomLocation()[1],
         price: getRandomInt(10000, 400000),
         type: getRandomType(typeHouse),
         rooms: getRandomInt(1, 6),
