@@ -1,5 +1,5 @@
 
-import {objectsArray} from './util.js';
+//import {objectsArray} from './model.js';
 import { renderApartment} from './generate.js';
 function ableForms(form) {
   Array.from(form.elements).forEach(formElement => formElement.disabled = false);
@@ -40,7 +40,7 @@ map.on('load',() => {
 map.setView({
   lat: 35.683472,
   lng: 139.752669,
-}, 12);
+}, 13);
 
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -83,32 +83,60 @@ marker.on('moveend', () => {
   address.disabled = false;
 });
 
-const points = objectsArray;
-console.log(points);
+// const points = objectsArray;
+// console.log(points);
+//
+//
+// points.forEach((point) => {
+//  const {location} = point;
+//   const icon = L.icon({
+//     iconUrl: 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg',
+//     iconSize: [40, 40],
+//     iconAnchor: [20, 40],
+//   });
+//
+//   const markers = L.marker(
+//     {
+//       lat:location.lat,
+//       lng:location.lng,
+//     },
+//     {
+//       icon,
+//     },
+//   );
+//
+//
+//   markers
+//     .addTo(map)
+//     .bindPopup(renderApartment(point));
+// });
+const PIN_AD = L.icon({
+  iconUrl: 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg',
+  iconSize: [40, 40],
+  iconAnchor: [20, 40],
+});
+// Создание слоя с группой меток
+const markerGroup = L.layerGroup().addTo(map);
 
-
-points.forEach((point) => {
- const {location} = point;
-  const icon = L.icon({
-    iconUrl: 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg',
-    iconSize: [40, 40],
-    iconAnchor: [20, 40],
-  });
-
-  const markers = L.marker(
-    {
-      lat:location.x,
-      lng:location.y,
-    },
-    {
-      icon,
+// Создание меток с объявлениями
+const createPinMarker = (data) => {
+  const pinMarker = L.marker(
+    data.location, {
+      icon: PIN_AD,
     },
   );
 
+  pinMarker
+    .addTo(markerGroup)
+    .bindPopup(
+      renderApartment(data), // привязывает балун-объявление к метке
+      {
+        keepInView: true, //карта автоматически перемещается, если всплывающий балун-объявление не помещается и вылезает за границы
+      },
+    );
+};
 
-  markers
-    .addTo(map)
-    .bindPopup(renderApartment(point));
-});
+// Очищение слоя с метками объявлений
+const clearMarker = () => markerGroup.clearLayers();
 
-export { map };
+export { createPinMarker,clearMarker,geoMarkers, map };

@@ -5,7 +5,7 @@
 const apartmentTemplate = document.querySelector('#card').content.querySelector('.popup');
 //const apartmentAddTest = document.querySelector('#balloon');
 
-const renderApartment = ({offer,autor}) => {
+const renderApartment = ({offer,author}) => {
   const apartmentPreview = apartmentTemplate.cloneNode(true);
 
   apartmentPreview.querySelector('.popup__title').textContent = offer.title;
@@ -36,16 +36,17 @@ const renderApartment = ({offer,autor}) => {
   apartmentPreview.querySelector('.popup__text--capacity').textContent = offer.rooms +' комнаты для '+ offer.guests+ ' гостей';
   apartmentPreview.querySelector('.popup__text--time').textContent = offer.checkin +', выезд до '+ offer.checkout;
   const apartmentFeatures =  apartmentPreview.querySelector('.popup__features');
-
-  offer.features.forEach((feature) => {
-    let featureLi = document.createElement('li');
-    featureLi.classList.add('popup__feature');
-    featureLi.classList.add('popup__feature--'+feature);
-    apartmentFeatures.appendChild(featureLi);
-  });
+  if(offer.hasOwnProperty('features')){
+    offer.features.forEach((feature) => {
+      let featureLi = document.createElement('li');
+      featureLi.classList.add('popup__feature');
+      featureLi.classList.add('popup__feature--'+feature);
+      apartmentFeatures.appendChild(featureLi);
+    });}
 
   apartmentPreview.querySelector('.popup__description').textContent = offer.description;
-const galleryPhotos = apartmentPreview.querySelector('.popup__photos');
+  const galleryPhotos = apartmentPreview.querySelector('.popup__photos');
+  if(offer.hasOwnProperty('photos')){
   offer.photos.forEach((photo) => {
     let img = document.createElement('img');
     img.src= photo;
@@ -53,9 +54,9 @@ const galleryPhotos = apartmentPreview.querySelector('.popup__photos');
     img.width= 45;
     img.height = 40;
     galleryPhotos.appendChild(img);
-  });
+  });}
 
-  apartmentPreview.querySelector('.popup__avatar').src = autor.avatar;
+  apartmentPreview.querySelector('.popup__avatar').src = author.avatar;
 
   return apartmentPreview;
 };
